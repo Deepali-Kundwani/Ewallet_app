@@ -18,9 +18,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -69,7 +71,7 @@ public class UserService implements UserDetailsService {
         String subject = "Please verify your registration";
         String senderName = "Ewallet team";
         String mailContent = "<p>Dear " + user.getName() + ",</p>";
-        mailContent += "<p>Please click the link below to verify your registration:</p>";
+        mailContent += "<p>Please click the link below to verify your registration. You have 1 hour to verify your account after which this link will expire.</p>";
         String verifyURL = siteURL + "/auth/verify?code=" + user.getToken();
         mailContent += "<h3><a href=\"" + verifyURL + "\">VERIFY</a></h3>";
         mailContent += "<p>Thank You<br>The Ewallet Team</p>";
@@ -115,6 +117,10 @@ public class UserService implements UserDetailsService {
         pendingUser.setPassword(passwordEncoder.encode(user.getPassword()));
         String randomCode = generateUniqueToken();
         pendingUser.setToken(randomCode);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MINUTE, 60);
+        Date expirationDate = calendar.getTime();
+        pendingUser.setExpirationDate(expirationDate);
         return pendingUserRepository.save(pendingUser);
     }
 

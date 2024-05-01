@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../subComponents/Navbar'
 import Sidebar from '../subComponents/Sidebar'
 import DashboardLayout from '../subComponents/DashboardLayout'

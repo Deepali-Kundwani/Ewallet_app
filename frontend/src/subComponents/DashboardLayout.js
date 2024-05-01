@@ -29,7 +29,7 @@ export default function DashboardLayout() {
     userDetail(token);
   })
 
-  const data = {
+  const data1 = {
     labels: ['Income', 'Expense', 'Cashback'],
     datasets: [
       {
@@ -37,6 +37,16 @@ export default function DashboardLayout() {
         data: [inc, exp, cback],
         backgroundColor: ['aqua', 'violet', 'orange'],
         borderColor: ['black', 'purple', 'red']
+      }
+    ]
+  };
+
+  const data2 = {
+    labels: ['No Transaction'],
+    datasets: [
+      {
+        data: [1],
+        backgroundColor: ['teal']
       }
     ]
   };
@@ -52,18 +62,11 @@ export default function DashboardLayout() {
         'Authorization': `Bearer ${token}`
       }
     }).then((response) => {
-      const { walletBalance, income, expenses,cashback } = response.data;
+      const { walletBalance, income, expenses, cashback } = response.data;
       setBalance(walletBalance.toFixed(2));
-      if (income === 0 && expenses === 0 && cashback === 0) {
-        setInc(1);
-        setExp(1);
-        setCback(1);
-      }
-      else {
-        setInc(income);
-        setExp(expenses);
-        setCback(cashback);
-      }
+      setInc(income);
+      setExp(expenses);
+      setCback(cashback);
     }).catch((error) => {
     })
   }
@@ -86,9 +89,15 @@ export default function DashboardLayout() {
           </div>
         </div>
         <div className='mx-auto' data-testid='doughnut-chart' style={{ width: '50%', height: '70%' }}>
-          <Doughnut data={data} options={options} >
+          {inc === 0 && exp === 0 && cback === 0 ? (
+            <Doughnut data={data2} options={options} >
 
-          </Doughnut>
+            </Doughnut>
+          ) : (
+            <Doughnut data={data1} options={options} >
+
+            </Doughnut>
+          )}
         </div>
       </div>
     </>

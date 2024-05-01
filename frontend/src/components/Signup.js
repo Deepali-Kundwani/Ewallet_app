@@ -3,25 +3,26 @@ import Navbar from '../subComponents/Navbar'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import signup from '../images/signup.png'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Signup() {
   const initialValues = { username: "", email: "", password: "" }
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
-  const [confirmMessage, setConfirmMessage] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
-    setIsSubmit(true);
+    setIsSubmit(true)
   }
 
   useEffect(() => {
@@ -34,19 +35,53 @@ export default function Signup() {
     }
   }, [formErrors, isSubmit]);
 
+  const confirmToast = (message) => {
+    toast.success(message, {
+      position: "top-center",
+      autoClose: 3500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  }
+
+  const errorToast = (message) => {
+    toast.error(message, {
+      position: "top-center",
+      autoClose: 3500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  }
+
   const validate = (values) => {
     const errors = {}
-    const regexemail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    const regexinitial = /^[^\s]+$/
-    const regexnumber = /^[a-zA-Z]+$/i;
+    const regexemail = /^([a-zA-Z0-9\._-]+)@([a-zA-Z0-9-])+\.([a-z]+)(.[a-z]+)?$/i;
+    const regexuser = /^[a-zA-Z0-9_-]+$/i;
+    const regexspaces = /^[^\s]+$/;
+    values.username = values.username.trim();
+    values.email = values.email.trim();
     if (!values.username) {
       errors.username = "Username is required"
     }
-    else if (!regexinitial.test(values.username)) {
-      errors.username = "Username must not contain spaces"
+    else if (values.username.length < 5) {
+      errors.username = "Username must be more than or equal to 5 characters"
     }
-    else if(!regexnumber.test(values.username)){
-      errors.username = "Username must not contain numbers";
+    else if (values.username.length > 15) {
+      errors.username = "Username must be less than or equal to 15 characters"
+    }
+    else if (!regexspaces.test(values.username)) {
+      errors.username = "Username must not contains spaces"
+    }
+    else if (!regexuser.test(values.username)) {
+      errors.username = "Username can only contains alphanumerics, underscore and dash"
     }
     if (!values.email) {
       errors.email = "Email is required"
@@ -57,43 +92,27 @@ export default function Signup() {
     if (!values.password) {
       errors.password = "Password is required"
     }
-    else if (values.password.length < 4) {
-      errors.password = "Password must be more than 4 characters"
+    else if (values.password.length < 5) {
+      errors.password = "Password must be more than or equal to 5 characters"
+    }
+    else if (values.password.length > 20) {
+      errors.password = "Password must be less than or equal to 20 characters"
     }
     return errors;
   }
   const onRegister = async () => {
-    setConfirmMessage("Please wait while we are processing your request");
-    setErrorMessage("");
     await axios.post("http://localhost:8080/auth/register", {
       name: formValues.username, email: formValues.email, password: formValues.password
     }).then((response) => {
-      setConfirmMessage("")
-      setConfirmMessage("Please check your email to verify your account")
-      setErrorMessage("");
+      confirmToast("Please check your email to verify your account")
     }).catch((error) => {
-      setConfirmMessage("")
-      setErrorMessage("User is already a member of ewallet")
+      errorToast("User is already a member of ewallet")
     })
   }
   return (
     <>
       <Navbar />
       <div className='container-fluid' style={{ marginTop: '40px' }}>
-        {confirmMessage.length !== 0 ? (
-          <div className="alert alert-success mx-auto text-center fw-bold" role="alert" style={{ width: '40%' }}>
-            {confirmMessage}
-          </div>
-        ) : (
-          null
-        )}
-        {errorMessage.length !== 0 ? (
-          <div className="alert alert-danger mx-auto text-center fw-bold" role="alert" style={{ width: '40%' }}>
-            {errorMessage}
-          </div>
-        ) : (
-          null
-        )}
         <form className='mx-auto p-3 rounded bg-white shadow-lg' style={{ width: '40%' }}>
           <h2 className='text-center'><img src={signup} alt="dashboard" style={{ width: '30px', marginRight: "10px" }} />Signup</h2>
           <div className="mb-3">
@@ -103,7 +122,7 @@ export default function Signup() {
           </div>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">Email address</label>
-            <input type="email" name='email' className="form-control rounded" id="email" value={formValues.email} onChange={handleChange} />
+            <input type="text" name='email' className="form-control rounded" id="email" value={formValues.email} onChange={handleChange} />
             <p className='text-danger'>{formErrors.email}</p>
           </div>
           <div className="mb-3">
@@ -115,6 +134,7 @@ export default function Signup() {
           <p className='mt-3'>Already have an account? <Link to="/login">Login</Link></p>
         </form>
       </div>
+      <ToastContainer style={{width: '35%', fontWeight: 'bold'}}/>
     </>
   )
 }

@@ -2,8 +2,10 @@ package com.example.Ewallet.controllers;
 
 import com.example.Ewallet.collections.PendingUser;
 import com.example.Ewallet.collections.User;
-import com.example.Ewallet.payloads.JwtRequest;
-import com.example.Ewallet.payloads.JwtResponse;
+import com.example.Ewallet.dto.LoginRequest;
+import com.example.Ewallet.dto.LoginResponse;
+import com.example.Ewallet.dto.RegisterRequest;
+import com.example.Ewallet.exceptions.AmountNotAvailableException;
 import com.example.Ewallet.security.JwtHelper;
 import com.example.Ewallet.services.UserService;
 import jakarta.mail.MessagingException;
@@ -11,8 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -46,7 +46,7 @@ class AuthControllersTest {
 
     @Test
     void login() {
-        JwtRequest request = new JwtRequest();
+        LoginRequest request = new LoginRequest();
         request.setEmail("testuser@example.com");
         request.setPassword("password123");
 
@@ -57,11 +57,7 @@ class AuthControllersTest {
         String mockToken = "123";
         when(helper.generateToken(userDetails)).thenReturn(mockToken);
 
-        ResponseEntity<JwtResponse> responseEntity = authControllers.login(request);
-
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-
-        JwtResponse response = responseEntity.getBody();
+        LoginResponse response = authControllers.login(request);
         assertNotNull(response);
         assertEquals(mockToken, response.getJwtToken());
     }
@@ -79,9 +75,9 @@ class AuthControllersTest {
 
         doNothing().when(userService).sendVerificationEmail(user, "http://example.com");
 
-        String result = authControllers.createUser(any(User.class), request);
+        String result = authControllers.createUser(any(RegisterRequest.class), request);
 
-        assertEquals("registration successfully", result);
+        assertEquals("registration processed", result);
     }
 
     @Test

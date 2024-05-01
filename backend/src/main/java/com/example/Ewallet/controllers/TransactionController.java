@@ -1,9 +1,11 @@
 package com.example.Ewallet.controllers;
 
 import com.example.Ewallet.collections.*;
+import com.example.Ewallet.dto.TransferRequest;
 import com.example.Ewallet.exceptions.AmountNotAvailableException;
-import com.example.Ewallet.payloads.AmountRequest;
-import com.example.Ewallet.payloads.DownloadRequest;
+import com.example.Ewallet.dto.DownloadResponse;
+import com.example.Ewallet.kafka.services.EmailConsumerService;
+import com.example.Ewallet.kafka.services.EmailProducerService;
 import com.example.Ewallet.security.JwtHelper;
 import com.example.Ewallet.services.TransactionService;
 import com.example.Ewallet.services.UserService;
@@ -28,11 +30,13 @@ public class TransactionController {
     @Autowired
     private JwtHelper jwtHelper;
 
+    @Autowired
+    private EmailProducerService emailProducerService;
 
     @PostMapping("/transfer")
-    public String transactionTransfer(@RequestBody AmountRequest amountRequest, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
-        String email = amountRequest.getEmail();
-        Double value = amountRequest.getAmount();
+    public String transactionTransfer(@RequestBody TransferRequest transferRequest, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+        String email = transferRequest.getEmail();
+        Double value = transferRequest.getAmount();
         User receiver = userService.getUserByEmail(email);
         String requestHeader = request.getHeader("Authorization");
         String token = requestHeader.substring(7);
@@ -46,10 +50,10 @@ public class TransactionController {
         }
         transactionService.addBalance(value, email);
         transactionService.decreaseBalance(value, sender.getUsername());
-        transactionService.creditMail(value, receiver, sender);
-        transactionService.debitMail(value, sender, receiver);
         transactionService.createCredit(value, receiver,sender);
         transactionService.createDebit(value, sender, receiver);
+        emailProducerService.sendCreditEmailMessage(value, receiver, sender);
+        emailProducerService.sendDebitEmailMessage(value, sender, receiver);
         return "Transfer Successfull";
     }
 
@@ -59,14 +63,14 @@ public class TransactionController {
         String token = requestHeader.substring(7);
         String username = this.jwtHelper.getUsernameFromToken(token);
         User user = userService.getUserByEmail(username);
-        transactionService.rechargeWallet(value, user);
-        transactionService.rechargeMail(value, user);
+        Transaction transaction = transactionService.rechargeWallet(value, user);
         Double cashback = value/10;
         if(cashback>150.0){
             cashback = 150.0;
         }
-        transactionService.createCashback(cashback, user);
-        transactionService.cashbackMail(cashback, user);
+        transactionService.createCashback(cashback, user, transaction);
+        emailProducerService.sendRechargeEmailMessage(value, user);
+        emailProducerService.sendCashbackEmailMessage(cashback, user);
         return "Recharge Successfull";
     }
 
@@ -80,7 +84,7 @@ public class TransactionController {
             throw new AmountNotAvailableException("Amount not available");
         }
         transactionService.withdrawWallet(value, user);
-        transactionService.withdrawMail(value, user);
+        emailProducerService.sendWithdrawEmailMessage(value, user);
         return "Withdraw Successfull";
     }
 
@@ -94,7 +98,7 @@ public class TransactionController {
     }
 
     @GetMapping("/download")
-    public List<DownloadRequest> downloadList(HttpServletRequest request){
+    public List<DownloadResponse> downloadList(HttpServletRequest request){
         String requestHeader = request.getHeader("Authorization");
         String token = requestHeader.substring(7);
         String username = this.jwtHelper.getUsernameFromToken(token);

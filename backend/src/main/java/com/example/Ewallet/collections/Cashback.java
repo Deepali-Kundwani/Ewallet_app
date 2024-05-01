@@ -16,6 +16,7 @@ import java.time.LocalDate;
 public class Cashback {
     @Id
     private String id;
+    private String tid;
     private String userId;
     private Double amount;
     private String description;

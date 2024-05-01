@@ -41,7 +41,7 @@ describe('Signup Component', () => {
     );
 
     fireEvent.change(screen.getByLabelText('Username'), {
-      target: { value: 'test' },
+      target: { value: 'test12' },
     });
     fireEvent.change(screen.getByLabelText('Email address'), {
       target: { value: 'test@example.com' },

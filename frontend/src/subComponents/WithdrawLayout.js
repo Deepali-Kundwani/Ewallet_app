@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function WithdrawLayout() {
     const initialValues = { value: 10 }
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
-    const [message, setMessage] = useState("")
-    const [errorMessage, setErrorMessage] = useState("")
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -27,6 +27,32 @@ export default function WithdrawLayout() {
         }
     }, [formErrors, isSubmit]);
 
+    const errorToast = (message) => {
+        toast.error(message, {
+          position: "top-center",
+          autoClose: 3500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+    
+      const confirmToast = (message) => {
+        toast.success(message, {
+          position: "top-center",
+          autoClose: 3500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+
     const validate = (values) => {
         const errors = {}
         if (!values.value) {
@@ -39,8 +65,6 @@ export default function WithdrawLayout() {
     }
 
     const onWithdraw = async (token) => {
-        setMessage("Please wait while we are processing your request")
-        setErrorMessage("")
         const amount = formValues.value;
         await axios.put(`http://localhost:8080/wallet/withdraw?value=${amount}`, null, {
             headers: {
@@ -48,14 +72,11 @@ export default function WithdrawLayout() {
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
-            setMessage("")
-            setMessage("Money withdraw successfull")
-            setErrorMessage("")
+            confirmToast("Money withdraw successfull")
             formValues.value = 10;
         }).catch((error) => {
             if (error.response.data === 'Amount not available') {
-                setMessage("")
-                setErrorMessage("Amount not available")
+                errorToast("Amount not available")
             }
         })
     }
@@ -64,20 +85,6 @@ export default function WithdrawLayout() {
             <div className="container rounded ms-2 shadow-lg" style={{ width: '90%', backgroundColor: '#f0f8ff' }}>
                 <h2 className='mb-5 mt-4'>Withdraw</h2>
                 <hr />
-                {message.length !== 0 ? (
-                    <div className="alert alert-success mx-auto text-center fw-bold" role="alert" style={{ width: '50%' }}>
-                        {message}
-                    </div>
-                ) : (
-                    null
-                )}
-                {errorMessage.length !== 0 ? (
-                    <div className="alert alert-danger mx-auto text-center fw-bold" role="alert" style={{ width: '50%' }}>
-                        {errorMessage}
-                    </div>
-                ) : (
-                    null
-                )}
                 <form>
                     <div className="mb-3">
                         <label htmlFor="exampleInputValue" className="form-label">Amount</label>
@@ -87,6 +94,7 @@ export default function WithdrawLayout() {
                     <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Withdraw to bank</button>
                 </form>
             </div>
+            <ToastContainer style={{width: '35%', fontWeight: 'bold'}}/>
         </>
     )
 }

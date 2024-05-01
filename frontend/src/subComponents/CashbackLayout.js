@@ -75,7 +75,7 @@ export default function CashbackLayout() {
             <table className="table">
               <thead>
                 <tr>
-                  <th scope="col" style={{ backgroundColor: 'rgb(99, 121, 244)' }}>Cid</th>
+                  <th scope="col" style={{ backgroundColor: 'rgb(99, 121, 244)' }}>Transaction Id</th>
                   <th scope="col" style={{ backgroundColor: 'rgb(99, 121, 244)' }}>Amount</th>
                   <th scope='col' style={{ backgroundColor: 'rgb(99, 121, 244)' }}>Description</th>
                   <th scope='col' style={{ backgroundColor: 'rgb(99, 121, 244)' }}>Date</th>

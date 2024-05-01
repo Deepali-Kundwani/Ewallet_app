@@ -2,6 +2,7 @@ package com.example.Ewallet.services;
 
 import com.example.Ewallet.collections.PendingUser;
 import com.example.Ewallet.collections.User;
+import com.example.Ewallet.dto.RegisterRequest;
 import com.example.Ewallet.repositories.PendingUserRepository;
 import com.example.Ewallet.repositories.UserRepository;
 import jakarta.mail.internet.MimeMessage;
@@ -91,9 +92,9 @@ class UserServiceTest {
         user.setName(pendingUser.getName());
         user.setEmail(pendingUser.getEmail());
         user.setPassword(pendingUser.getPassword());
-        when(userRepository.save(user)).thenReturn(user);
+        when(userRepository.save(any(User.class))).thenReturn(user);
         User actual = userService.createUser(pendingUser);
-
+        assertEquals(actual, user);
     }
 
     @Test
@@ -119,6 +120,23 @@ class UserServiceTest {
         boolean result = userService.verify(token);
         assertTrue(result);
         verify(pendingUserRepository, times(1)).delete(user);
+    }
+
+    @Test
+    void createPendingUserTest(){
+        RegisterRequest registerRequest = new RegisterRequest();
+        registerRequest.setName("Gaurav");
+        registerRequest.setEmail("gauravkundwani4@gmail.com");
+        registerRequest.setPassword(passwordEncoder.encode("Gaurav"));
+        PendingUser pendingUser = new PendingUser();
+        pendingUser.setId("1234");
+        pendingUser.setEmail(registerRequest.getEmail());
+        pendingUser.setName(registerRequest.getName());
+        pendingUser.setPassword(pendingUser.getPassword());
+        pendingUser.setToken("56789");
+        when(pendingUserRepository.save(any(PendingUser.class))).thenReturn(pendingUser);
+        PendingUser actual = userService.createPendingUser(registerRequest);
+        assertEquals(actual, pendingUser);
     }
 
 }

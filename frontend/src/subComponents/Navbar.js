@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom'
 import drop from '../images/Drop.png'
 import user from '../images/user.png'
 import axios from 'axios'
+import { useNavigate} from 'react-router-dom';
 
 
 export default function Navbar() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [userName, setUserName] = useState("")
+    const navigate = useNavigate();
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -31,6 +33,8 @@ export default function Navbar() {
             setUserName(name);
         }).catch((error) => {
             setUserName("");
+            localStorage.removeItem('token');
+            navigate("/")
         })
     }
 

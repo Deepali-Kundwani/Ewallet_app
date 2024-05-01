@@ -1,0 +1,18 @@
+
+•	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ô‹ÌÍJ$5bb7735b-2e62-462d-b9b8-73fa8dc544cb
+~
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞJ$fef5f6da-b154-4289-b682-f2af6d4cdec8
+~
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞJ$fc8f18b1-8f46-4348-bd0e-f01d193f2788
+~
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞJ$ff803acb-97b0-47da-8f68-a459572bbe45
+~
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞJ$c76ddbaa-5cd8-439f-a86d-5b5e01807eec
+–
+java:S3305"ZInject this field value directly into "securityFilterChain", the only method that uses it.(¸ßöúJ$0968f169-0f15-49f9-bc34-5e5c1dcce28b
+£
+java:S3305"bInject this field value directly into "doDaoAuthenticationProvider", the only method that uses it.(¿ì§’ýÿÿÿÿJ$f301bd2b-1cd7-4edc-a6db-72117a34d139
+–
+java:S3305"ZInject this field value directly into "securityFilterChain", the only method that uses it.(ÓÏäËJ$074f015b-9ac9-4654-8e96-323aa091d604
+£
+java:S3305"bInject this field value directly into "doDaoAuthenticationProvider", the only method that uses it.(ÙÍ•¯üÿÿÿÿJ$38ed1502-5467-41e1-963f-5448b09695c4

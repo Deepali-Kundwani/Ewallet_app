@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6bd3b1b4-a5e2-4dd4-b352-aae732a7af90" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/dto/LoginRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/collections/Cashback.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/collections/Cashback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/collections/PendingUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/collections/PendingUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/collections/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/collections/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/config/CorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/controllers/AuthControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/controllers/AuthControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/controllers/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/controllers/TransactionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/exceptions/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/exceptions/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/payloads/AmountRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/dto/TransferRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/payloads/DownloadRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/dto/DownloadResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/payloads/JwtRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/payloads/JwtResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/dto/LoginResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/services/TransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/services/TransactionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/Ewallet/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/example/Ewallet/controllers/AuthControllersTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/example/Ewallet/controllers/AuthControllersTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/example/Ewallet/controllers/TransactionControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/example/Ewallet/controllers/TransactionControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/example/Ewallet/services/TransactionServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/example/Ewallet/services/TransactionServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/example/Ewallet/services/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/example/Ewallet/services/UserServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/EwalletApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/EwalletApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/collections/Cashback.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/collections/Cashback.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/collections/PendingUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/collections/PendingUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/collections/Transaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/collections/Transaction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/collections/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/collections/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/config/AppConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/config/AppConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/config/CorsConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/config/CorsConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/config/MongoConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/config/MongoConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/controllers/AuthControllers.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/controllers/AuthControllers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/controllers/TransactionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/controllers/TransactionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/controllers/UserControllers.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/controllers/UserControllers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/exceptions/AmountNotAvailableException.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/exceptions/AmountNotAvailableException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/exceptions/GlobalExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/exceptions/GlobalExceptionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/exceptions/UserAlreadyExistException.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/exceptions/UserAlreadyExistException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/payloads/AmountRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/payloads/DownloadRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/payloads/JwtRequest$JwtRequestBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/payloads/JwtRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/payloads/JwtResponse$JwtResponseBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/payloads/JwtResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/repositories/CashbackRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/repositories/CashbackRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/repositories/PendingUserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/repositories/PendingUserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/repositories/TransactionRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/repositories/TransactionRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/repositories/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/repositories/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/security/JwtAuthenticationEntryPoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/security/JwtAuthenticationEntryPoint.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/security/JwtAuthenticationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/security/JwtAuthenticationFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/security/JwtHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/security/JwtHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/services/TransactionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/services/TransactionService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/services/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/Ewallet/services/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/EwalletApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/EwalletApplicationTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/controllers/AuthControllersTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/controllers/AuthControllersTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/controllers/TransactionControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/controllers/TransactionControllerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/controllers/UserControllersTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/controllers/UserControllersTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/repositories/CashbackRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/repositories/CashbackRepositoryTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/repositories/PendingUserRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/repositories/PendingUserRepositoryTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/repositories/TransactionRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/repositories/TransactionRepositoryTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/repositories/UserRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/repositories/UserRepositoryTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/services/TransactionServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/services/TransactionServiceTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/services/UserServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/test-classes/com/example/Ewallet/services/UserServiceTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/subComponents/CashbackLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/subComponents/CashbackLayout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/subComponents/DashboardLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/subComponents/DashboardLayout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/subComponents/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/subComponents/Navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/subComponents/TopupLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/subComponents/TopupLayout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/subComponents/TransactionLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/subComponents/TransactionLayout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/subComponents/TransferLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/subComponents/TransferLayout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/subComponents/WithdrawLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/subComponents/WithdrawLayout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/tests/Signup.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/tests/Signup.test.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="2cfBRdVJj1qEXXKKCpNrzk6llYF" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/gaurav/Desktop/Training Assignments/Wallet App"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
+      <option name="appName" />
+      <option name="appServicePlanName" />
+      <option name="appServicePlanResourceGroup" />
+      <option name="appSettingsKey" value="ef44531e-f34e-41af-9fb4-c7c00773b7d9" />
+      <option name="artifact" />
+      <option name="debugOptions" />
+      <option name="deployment" />
+      <option name="deploymentStagingDirectoryPath" />
+      <option name="funcPath" />
+      <option name="functionHostArguments" />
+      <option name="hostJsonPath" />
+      <option name="insightsName" />
+      <option name="instrumentationKey" />
+      <option name="javaVersion" />
+      <option name="localSettingsJsonPath" />
+      <option name="moduleName" />
+      <option name="os" />
+      <option name="pricingTier" />
+      <option name="providerMap">
+        <map />
+      </option>
+      <option name="region" />
+      <option name="resourceGroup" />
+      <option name="stagingFolder" />
+      <option name="subscription" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6bd3b1b4-a5e2-4dd4-b352-aae732a7af90" name="Changes" comment="" />
+      <created>1708492745966</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1708492745966</updated>
+    </task>
+    <servers />
+  </component>
+</project>

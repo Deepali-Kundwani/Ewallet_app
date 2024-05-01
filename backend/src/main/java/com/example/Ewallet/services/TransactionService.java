@@ -1,7 +1,7 @@
 package com.example.Ewallet.services;
 
 import com.example.Ewallet.collections.Cashback;
-import com.example.Ewallet.payloads.DownloadRequest;
+import com.example.Ewallet.dto.DownloadResponse;
 import com.example.Ewallet.collections.Transaction;
 import com.example.Ewallet.collections.User;
 import com.example.Ewallet.repositories.CashbackRepository;
@@ -55,38 +55,38 @@ public class TransactionService {
         userRepository.save(user);
     }
 
-    public void creditMail(Double value, User receiver, User sender) throws MessagingException, UnsupportedEncodingException {
-        String subject = "Account credited with Rs. " + value;
-        String senderName = "Ewallet team";
-        String mailContent = "<p>Dear " + receiver.getName() + ",</p>";
-        mailContent += "<p>Your account is credited with Rs. " + value + " From " + sender.getName() + "</p>";
-        mailContent += "<p>Thank You<br>The Ewallet Team</p>";
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
-        helper.setFrom("walletbanker027@gmail.com", senderName);
-        helper.setTo(receiver.getEmail());
-        helper.setSubject(subject);
-        helper.setText(mailContent, true);
-        mailSender.send(message);
-    }
+//    public void creditMail(Double value, User receiver, User sender) throws MessagingException, UnsupportedEncodingException {
+//        String subject = "Account credited with Rs. " + value;
+//        String senderName = "Ewallet team";
+//        String mailContent = "<p>Dear " + receiver.getName() + ",</p>";
+//        mailContent += "<p>Your account is credited with Rs. " + value + " From " + sender.getName() + "</p>";
+//        mailContent += "<p>Thank You<br>The Ewallet Team</p>";
+//        MimeMessage message = mailSender.createMimeMessage();
+//        MimeMessageHelper helper = new MimeMessageHelper(message);
+//        helper.setFrom("walletbanker027@gmail.com", senderName);
+//        helper.setTo(receiver.getEmail());
+//        helper.setSubject(subject);
+//        helper.setText(mailContent, true);
+//        mailSender.send(message);
+//    }
 
-    public void debitMail(Double value, User sender, User receiver) throws MessagingException, UnsupportedEncodingException{
-        String subject = "Account debited with Rs. " + value;
-        String senderName = "Ewallet team";
-        String mailContent = "<p>Dear " + sender.getName() + ",</p>";
-        mailContent += "<p>Your account is debited with Rs. " + value + " to " + receiver.getName() + "</p>";
-        mailContent += "<p>Thank You<br>The Ewallet Team</p>";
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
-        helper.setFrom("walletbanker027@gmail.com", senderName);
-        helper.setTo(sender.getEmail());
-        helper.setSubject(subject);
-        helper.setText(mailContent, true);
-        mailSender.send(message);
-    }
+//    public void debitMail(Double value, User sender, User receiver) throws MessagingException, UnsupportedEncodingException{
+//        String subject = "Account debited with Rs. " + value;
+//        String senderName = "Ewallet team";
+//        String mailContent = "<p>Dear " + sender.getName() + ",</p>";
+//        mailContent += "<p>Your account is debited with Rs. " + value + " to " + receiver.getName() + "</p>";
+//        mailContent += "<p>Thank You<br>The Ewallet Team</p>";
+//        MimeMessage message = mailSender.createMimeMessage();
+//        MimeMessageHelper helper = new MimeMessageHelper(message);
+//        helper.setFrom("walletbanker027@gmail.com", senderName);
+//        helper.setTo(sender.getEmail());
+//        helper.setSubject(subject);
+//        helper.setText(mailContent, true);
+//        mailSender.send(message);
+//    }
 
     @Transactional
-    public void rechargeWallet(Double value, User user){
+    public Transaction rechargeWallet(Double value, User user){
         user.setWalletBalance(user.getWalletBalance() + value);
         user.setIncome(user.getIncome() + value);
         Transaction transaction = new Transaction();
@@ -98,7 +98,7 @@ public class TransactionService {
         transaction.setDate(LocalDate.now());
         transaction.setDescription("Received from Bank");
         userRepository.save(user);
-        transactionRepository.save(transaction);
+        return transactionRepository.save(transaction);
     }
 
     @Transactional
@@ -141,61 +141,47 @@ public class TransactionService {
         transactionRepository.save(transaction);
     }
 
-    private String generateUniqueId(){
-        String randomCode = RandomString.make(5);
-        if(transactionRepository.existsById(randomCode)){
-            return generateUniqueId();
-        }
-        return randomCode;
-    }
-    private String generateUniqueIdCashback(){
-        String randomCode = RandomString.make(5);
-        if(cashbackRepository.existsById(randomCode)){
-            return generateUniqueIdCashback();
-        }
-        return randomCode;
-    }
-
     public List<Transaction> transactions(String userId){
         return transactionRepository.findByUserId(userId);
     }
 
-    public List<DownloadRequest> downloads(String userId){
+    public List<DownloadResponse> downloads(String userId){
         List<Transaction> transactions = transactionRepository.findByUserId(userId);
-        List<DownloadRequest> list = new ArrayList<>();
+        List<DownloadResponse> list = new ArrayList<>();
         for(Transaction transaction : transactions){
-            DownloadRequest downloadRequest = new DownloadRequest();
-            downloadRequest.setTid(transaction.getId());
-            downloadRequest.setAmount(transaction.getAmount());
-            downloadRequest.setDescription(transaction.getDescription());
-            downloadRequest.setDate(transaction.getDate());
-            downloadRequest.setType(transaction.getType());
-            list.add(downloadRequest);
+            DownloadResponse downloadResponse = new DownloadResponse();
+            downloadResponse.setTid(transaction.getId());
+            downloadResponse.setAmount(transaction.getAmount());
+            downloadResponse.setDescription(transaction.getDescription());
+            downloadResponse.setDate(transaction.getDate());
+            downloadResponse.setType(transaction.getType());
+            list.add(downloadResponse);
         }
         return list;
     }
 
-    public void cashbackMail(Double value, User user) throws MessagingException, UnsupportedEncodingException{
-        String subject = "Received cashback of Rs. " + value;
-        String senderName = "Ewallet team";
-        String mailContent = "<p>Dear " + user.getName() + ",</p>";
-        mailContent += "<p>You got a cashback of Rs. " + value + " in your Ewallet account</p>";
-        mailContent += "<p>Thank You<br>The Ewallet Team</p>";
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
-        helper.setFrom("walletbanker027@gmail.com", senderName);
-        helper.setTo(user.getEmail());
-        helper.setSubject(subject);
-        helper.setText(mailContent, true);
-        mailSender.send(message);
-    }
+//    public void cashbackMail(Double value, User user) throws MessagingException, UnsupportedEncodingException{
+//        String subject = "Received cashback of Rs. " + value;
+//        String senderName = "Ewallet team";
+//        String mailContent = "<p>Dear " + user.getName() + ",</p>";
+//        mailContent += "<p>You got a cashback of Rs. " + value + " in your Ewallet account</p>";
+//        mailContent += "<p>Thank You<br>The Ewallet Team</p>";
+//        MimeMessage message = mailSender.createMimeMessage();
+//        MimeMessageHelper helper = new MimeMessageHelper(message);
+//        helper.setFrom("walletbanker027@gmail.com", senderName);
+//        helper.setTo(user.getEmail());
+//        helper.setSubject(subject);
+//        helper.setText(mailContent, true);
+//        mailSender.send(message);
+//    }
 
     @Transactional
-    public void createCashback(Double value, User user) {
+    public void createCashback(Double value, User user, Transaction transaction) {
         user.setCashback(user.getCashback() + value);
         user.setWalletBalance(user.getWalletBalance() + value);
         Cashback cashback = new Cashback();
         cashback.setId(generateUniqueIdCashback());
+        cashback.setTid(transaction.getId());
         cashback.setUserId(user.getUserId());
         cashback.setAmount(value);
         cashback.setDescription("Received from Ewallet");
@@ -208,33 +194,48 @@ public class TransactionService {
         return cashbackRepository.findByUserId(userId);
     }
 
-    public void rechargeMail(Double value, User user) throws MessagingException, UnsupportedEncodingException{
-        String subject = "Recharge of Rs. " + value;
-        String senderName = "Ewallet team";
-        String mailContent = "<p>Dear " + user.getName() + ",</p>";
-        mailContent += "<p>Recharge of Rs. " + value + " has done in your Ewallet account</p>";
-        mailContent += "<p>Thank You<br>The Ewallet Team</p>";
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
-        helper.setFrom("walletbanker027@gmail.com", senderName);
-        helper.setTo(user.getEmail());
-        helper.setSubject(subject);
-        helper.setText(mailContent, true);
-        mailSender.send(message);
-    }
+//    public void rechargeMail(Double value, User user) throws MessagingException, UnsupportedEncodingException{
+//        String subject = "Recharge of Rs. " + value;
+//        String senderName = "Ewallet team";
+//        String mailContent = "<p>Dear " + user.getName() + ",</p>";
+//        mailContent += "<p>Recharge of Rs. " + value + " has done in your Ewallet account</p>";
+//        mailContent += "<p>Thank You<br>The Ewallet Team</p>";
+//        MimeMessage message = mailSender.createMimeMessage();
+//        MimeMessageHelper helper = new MimeMessageHelper(message);
+//        helper.setFrom("walletbanker027@gmail.com", senderName);
+//        helper.setTo(user.getEmail());
+//        helper.setSubject(subject);
+//        helper.setText(mailContent, true);
+//        mailSender.send(message);
+//    }
 
-    public void withdrawMail(Double value, User user) throws MessagingException, UnsupportedEncodingException{
-        String subject = "Withdraw of Rs. " + value;
-        String senderName = "Ewallet team";
-        String mailContent = "<p>Dear " + user.getName() + ",</p>";
-        mailContent += "<p>Withdraw of Rs. " + value + " has done from your Ewallet account</p>";
-        mailContent += "<p>Thank You<br>The Ewallet Team</p>";
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
-        helper.setFrom("walletbanker027@gmail.com", senderName);
-        helper.setTo(user.getEmail());
-        helper.setSubject(subject);
-        helper.setText(mailContent, true);
-        mailSender.send(message);
+//    public void withdrawMail(Double value, User user) throws MessagingException, UnsupportedEncodingException{
+//        String subject = "Withdraw of Rs. " + value;
+//        String senderName = "Ewallet team";
+//        String mailContent = "<p>Dear " + user.getName() + ",</p>";
+//        mailContent += "<p>Withdraw of Rs. " + value + " has done from your Ewallet account</p>";
+//        mailContent += "<p>Thank You<br>The Ewallet Team</p>";
+//        MimeMessage message = mailSender.createMimeMessage();
+//        MimeMessageHelper helper = new MimeMessageHelper(message);
+//        helper.setFrom("walletbanker027@gmail.com", senderName);
+//        helper.setTo(user.getEmail());
+//        helper.setSubject(subject);
+//        helper.setText(mailContent, true);
+//        mailSender.send(message);
+//    }
+
+    private String generateUniqueId(){
+        String randomCode = RandomString.make(12);
+        if(transactionRepository.existsById(randomCode)){
+            return generateUniqueId();
+        }
+        return randomCode;
+    }
+    private String generateUniqueIdCashback(){
+        String randomCode = RandomString.make(12);
+        if(cashbackRepository.existsById(randomCode)){
+            return generateUniqueIdCashback();
+        }
+        return randomCode;
     }
 }

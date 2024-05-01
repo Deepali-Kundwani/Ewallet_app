@@ -3,26 +3,24 @@ package com.example.Ewallet.services;
 import com.example.Ewallet.collections.PendingUser;
 import com.example.Ewallet.collections.User;
 import com.example.Ewallet.exceptions.UserAlreadyExistException;
+import com.example.Ewallet.dto.RegisterRequest;
 import com.example.Ewallet.repositories.PendingUserRepository;
 import com.example.Ewallet.repositories.UserRepository;
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
+import jakarta.validation.Valid;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -39,6 +37,11 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PendingUserRepository pendingUserRepository;
 
+    @Autowired
+    private KafkaTemplate<String, Object> kafkaTemplate;
+
+    private final String topicName = "email-verification-topic";
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDetails user = userRepository.findByEmail(username).orElseThrow(() -> new RuntimeException("User not found"));
@@ -53,7 +56,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    public User createUser(PendingUser pendingUser){
+    public User createUser(@Valid PendingUser pendingUser){
         User user = new User();
         user.setUserId(generateUniqueUserId());
         user.setPassword(pendingUser.getPassword());
@@ -65,23 +68,6 @@ public class UserService implements UserDetailsService {
         user.setIncome((double) 0);
         user.setExpenses((double) 0);
         return userRepository.save(user);
-    }
-
-    public void sendVerificationEmail (PendingUser user, String siteURL) throws MessagingException, UnsupportedEncodingException {
-        String subject = "Please verify your registration";
-        String senderName = "Ewallet team";
-        String mailContent = "<p>Dear " + user.getName() + ",</p>";
-        mailContent += "<p>Please click the link below to verify your registration. You have 1 hour to verify your account after which this link will expire.</p>";
-        String verifyURL = siteURL + "/auth/verify?code=" + user.getToken();
-        mailContent += "<h3><a href=\"" + verifyURL + "\">VERIFY</a></h3>";
-        mailContent += "<p>Thank You<br>The Ewallet Team</p>";
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
-        helper.setFrom("walletbanker027@gmail.com", senderName);
-        helper.setTo(user.getEmail());
-        helper.setSubject(subject);
-        helper.setText(mailContent, true);
-        mailSender.send(message);
     }
 
     public boolean verify(String verificationCode){
@@ -103,7 +89,7 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public PendingUser createPendingUser(User user){
+    public PendingUser createPendingUser(RegisterRequest user){
         List<User> users = userRepository.findAll();
         users.forEach(user1 -> {
             if(user.getEmail().equals(user1.getEmail())){

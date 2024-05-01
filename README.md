@@ -1,4 +1,4 @@
-# CampAdvisor Project
+# Wallet Banking Application
 
 ### Description
 
@@ -27,20 +27,20 @@ A wallet banking app using java spring boot and react.js
 
 #### Landing Page
 
-![](Screenshot/Landing.png)
+![](Screenshots/Landing.png)
 
 #### Signup Page
 
-![](Screenshot/Signup.PNG)
+![](Screenshots/Signup.png)
 
 #### Login Page
 
-![](Screenshot/Login.PNG)
+![](Screenshots/Login.png)
 
 #### Dashboard Page
 
-![](Screenshot/Dashboard.PNG)
+![](Screenshots/Dashboard.png)
 
 #### Transactions Page
 
-![](Screenshot/Transactions.PNG)
+![](Screenshots/Transactions.png)
